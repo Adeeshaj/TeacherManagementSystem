@@ -1,0 +1,8 @@
+com/vector/school/model/Class.class
+com/vector/school/model/User.class
+com/vector/school/Controller/TeacherProfile_controller.class
+com/vector/school/App.class
+com/vector/school/model/Teacher.class
+com/vector/school/Controller/Signup_controller.class
+com/vector/school/model/Admin.class
+com/vector/school/DBquery/Teacher_db.class

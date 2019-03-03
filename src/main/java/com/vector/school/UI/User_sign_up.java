@@ -2,6 +2,7 @@ package com.vector.school.UI;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.vector.school.App;
 import com.vector.school.Controller.Signup_controller;
 
 
@@ -27,6 +28,7 @@ public class User_sign_up {
     private JPanel birthdayPanel;
     private JTextField adminSecretTextField;
     private JLabel adminSecretLabel;
+    private JButton homeButton;
     private DatePicker date_birthday = new DatePicker();
     private Signup_controller controller = new Signup_controller();
 
@@ -97,18 +99,26 @@ public class User_sign_up {
                                 Date birthday = new Date((Integer) yearComboBox.getSelectedItem(), monthComboBox.getSelectedIndex(), (Integer) dateComboBox.getSelectedItem());
                                 if (controller.user_name_available(usernameTextField.getText())) {
                                     if (roleComboBox.getSelectedItem().toString().equals("Admin")) {
-                                        if (adminSecretTextField.getText() == "SchoolAdmin") {
+                                        if (adminSecretTextField.getText().equals("SchoolAdmin")) {
                                             if (controller.signup_user(fullNameTextField.getText(), usernameTextField.getText(), String.valueOf(passwordField1.getPassword()), birthday, (String) roleComboBox.getSelectedItem())) {
                                                 JOptionPane.showMessageDialog(null, "Success");
+                                                App.frame.setContentPane(new AdminHome().getAdminHomePanel());
+                                                App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                                App.frame.pack();
+                                                App.frame.setVisible(true);
                                             } else {
                                                 JOptionPane.showMessageDialog(null, "Failed");
                                             }
                                         } else {
                                             JOptionPane.showMessageDialog(null, "Admin Secret is not Valid");
                                         }
-                                    } else {
+                                    } else if (roleComboBox.getSelectedItem().toString().equals("Teacher")) {
                                         if (controller.signup_user(fullNameTextField.getText(), usernameTextField.getText(), String.valueOf(passwordField1.getPassword()), birthday, (String) roleComboBox.getSelectedItem())) {
                                             JOptionPane.showMessageDialog(null, "Success");
+                                            App.frame.setContentPane(new TeacherHome().getTeacherHomePanel());
+                                            App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                            App.frame.pack();
+                                            App.frame.setVisible(true);
                                         } else {
                                             JOptionPane.showMessageDialog(null, "Failed");
                                         }
@@ -148,6 +158,17 @@ public class User_sign_up {
                 }
             }
         });
+
+        homeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                App.frame.setContentPane(new Home().getHomeJpanel());
+                App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                App.frame.pack();
+                App.frame.setVisible(true);
+            }
+        });
+
     }
 
 
@@ -172,7 +193,7 @@ public class User_sign_up {
      */
     private void $$$setupUI$$$() {
         signupPanel = new JPanel();
-        signupPanel.setLayout(new GridLayoutManager(8, 2, new Insets(0, 0, 0, 0), -1, -1));
+        signupPanel.setLayout(new GridLayoutManager(9, 2, new Insets(0, 0, 0, 0), -1, -1));
         final JLabel label1 = new JLabel();
         label1.setText("Full Name");
         signupPanel.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -236,6 +257,9 @@ public class User_sign_up {
         adminSecretLabel.setText("Admin Secret");
         adminSecretLabel.setVisible(false);
         signupPanel.add(adminSecretLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        homeButton = new JButton();
+        homeButton.setText("Home");
+        signupPanel.add(homeButton, new GridConstraints(8, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -244,4 +268,5 @@ public class User_sign_up {
     public JComponent $$$getRootComponent$$$() {
         return signupPanel;
     }
+
 }

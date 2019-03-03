@@ -48,6 +48,7 @@ public class TeacherProfileEdit {
     private JTextField mobileTextField;
     private JButton saveButton;
     private JTextField aptTypeTextField;
+    private JButton homeButton;
     private JFileChooser fileChooser;
     private String osname = System.getProperty("os.name", "").toLowerCase();
     private DatePicker dateBD = new DatePicker();
@@ -261,12 +262,23 @@ public class TeacherProfileEdit {
                             String[] subjects = subjectstextArea.getText().split("\\n");
                             if (controller.updateTeacher(fullNameTextField.getText(), selectedFile.getName(), birthday, fad, sad, aptTypeTextField.getText(), subjects, eduQuaTextField.getText(), profQuaTextField.getText(), nidTextField.getText(), addressTextField.getText(), mobileTextField.getText())) {
                                 JOptionPane.showMessageDialog(null, "data saved");
+
                             }
                         }
                     }
                 }
 
 
+            }
+        });
+
+        homeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                App.frame.setContentPane(new Home().getHomeJpanel());
+                App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                App.frame.pack();
+                App.frame.setVisible(true);
             }
         });
     }
@@ -297,7 +309,7 @@ public class TeacherProfileEdit {
      */
     private void $$$setupUI$$$() {
         teacherProfileEditPanel = new JPanel();
-        teacherProfileEditPanel.setLayout(new GridLayoutManager(13, 2, new Insets(0, 0, 0, 0), -1, -1));
+        teacherProfileEditPanel.setLayout(new GridLayoutManager(14, 2, new Insets(0, 0, 0, 0), -1, -1));
         final JLabel label1 = new JLabel();
         label1.setText("Full name");
         teacherProfileEditPanel.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -415,6 +427,9 @@ public class TeacherProfileEdit {
         teacherProfileEditPanel.add(label12, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         aptTypeTextField = new JTextField();
         teacherProfileEditPanel.add(aptTypeTextField, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        homeButton = new JButton();
+        homeButton.setText("Home");
+        teacherProfileEditPanel.add(homeButton, new GridConstraints(13, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -423,4 +438,5 @@ public class TeacherProfileEdit {
     public JComponent $$$getRootComponent$$$() {
         return teacherProfileEditPanel;
     }
+
 }

@@ -31,6 +31,7 @@ public class TeacherProfile {
     private JLabel availbilityLabel;
     private JPanel teacherProfilePanel;
     private JButton editbutton;
+    private JButton homeButton;
     private String osname = System.getProperty("os.name", "").toLowerCase();
 
     public TeacherProfile() {
@@ -38,26 +39,36 @@ public class TeacherProfile {
         Teacher teacher = new TeacherProfile_controller().getTeacher(App.cacheUser);
         setAddressLabel(null);
         if (teacher != null) {
-
-            setAddressLabel(teacher.getAddress());
-            setAvailbilityLabel(teacher.getAvailablity());
-            setBirthdaylabel(teacher.getBirthday());
-            setDPlabel(teacher.getTeacher_prof_pic(), teacher.get_id());
-            setEduQuaLabel(teacher.getEdu_qualification());
-            setFirstAppointDateLabel(teacher.getFirst_apointment_date());
-            setMobileLabel(teacher.getMobile());
-            setNamelabel(teacher.getName());
-            setNidLabel(teacher.getNid());
-            setProfQua(teacher.getProf_qualification());
-            setSclAppointDateLabel(teacher.getSchool_apointment_date());
-            setSubjectsLabel(teacher.getSubjects());
-
+            if (teacher.getAddress() != null) setAddressLabel(teacher.getAddress());
+            if (teacher.getAvailablity() != null) setAvailbilityLabel(teacher.getAvailablity());
+            if (teacher.getBirthday() != null) setBirthdaylabel(teacher.getBirthday());
+            if (teacher.getTeacher_prof_pic() != null) setDPlabel(teacher.getTeacher_prof_pic(), teacher.get_id());
+            if (teacher.getEdu_qualification() != null) setEduQuaLabel(teacher.getEdu_qualification());
+            if (teacher.getFirst_apointment_date() != null)
+                setFirstAppointDateLabel(teacher.getFirst_apointment_date());
+            if (teacher.getMobile() != null) setMobileLabel(teacher.getMobile());
+            if (teacher.getName() != null) setNamelabel(teacher.getName());
+            if (teacher.getNid() != null) setNidLabel(teacher.getNid());
+            if (teacher.getProf_qualification() != null) setProfQua(teacher.getProf_qualification());
+            if (teacher.getSchool_apointment_date() != null)
+                setSclAppointDateLabel(teacher.getSchool_apointment_date());
+            if (teacher.getSubjects() != null) setSubjectsLabel(teacher.getSubjects());
         }
 
         editbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 App.frame.setContentPane(new TeacherProfileEdit().getTeacherProfileEditPanel());
+                App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                App.frame.pack();
+                App.frame.setVisible(true);
+            }
+        });
+
+        homeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                App.frame.setContentPane(new Home().getHomeJpanel());
                 App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 App.frame.pack();
                 App.frame.setVisible(true);
@@ -375,6 +386,13 @@ public class TeacherProfile {
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         teacherProfilePanel.add(editbutton, gbc);
+        homeButton = new JButton();
+        homeButton.setText("Home");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        teacherProfilePanel.add(homeButton, gbc);
     }
 
     /**
@@ -383,4 +401,5 @@ public class TeacherProfile {
     public JComponent $$$getRootComponent$$$() {
         return teacherProfilePanel;
     }
+
 }

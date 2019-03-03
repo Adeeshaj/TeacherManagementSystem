@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.vector.school.UI.TeacherProfileEdit">
-  <grid id="27dc6" binding="teacherProfileEditPanel" layout-manager="GridLayoutManager" row-count="13" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="teacherProfileEditPanel" layout-manager="GridLayoutManager" row-count="14" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="416"/>
+      <xy x="20" y="20" width="509" height="525"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -321,6 +321,14 @@
           </grid>
         </constraints>
         <properties/>
+      </component>
+      <component id="c2f53" class="javax.swing.JButton" binding="homeButton" default-binding="true">
+        <constraints>
+          <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Home"/>
+        </properties>
       </component>
     </children>
   </grid>

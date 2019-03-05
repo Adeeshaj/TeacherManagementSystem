@@ -9,7 +9,9 @@ import com.vector.school.model.User;
 import org.bson.types.ObjectId;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Teacher_db {
     private String _id;
@@ -281,6 +283,33 @@ public class Teacher_db {
             } else {
                 return null;
             }
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Teacher> get_all_teachers(){
+        List<Teacher> teacher_list = new ArrayList<>();
+        MongoClient mongoClient = null;
+        try {
+            mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+
+            DB database = mongoClient.getDB("Schooldb");
+            DBCollection collection = database.getCollection("teachers");
+            DBCursor cursor  = collection.find();
+            while (cursor.hasNext()){
+                DBObject object = cursor.next();
+                Teacher_db teacher_db_ob = new Gson().fromJson(object.toString(), Teacher_db.class);
+                Teacher teacher_obj = new Teacher(teacher_db_ob.getUser_id(),teacher_db_ob.getName(),teacher_db_ob.getTeacher_prof_pic(),teacher_db_ob.getBirthday(),teacher_db_ob.getFirst_apointment_date(),teacher_db_ob.getSchool_apointment_date(),teacher_db_ob.getTeacher_appointment_type(),teacher_db_ob.getSubjects(),teacher_db_ob.getEdu_qualification(),teacher_db_ob.getProf_qualification(),teacher_db_ob.getNid(),teacher_db_ob.getAddress(),teacher_db_ob.getMobile(),teacher_db_ob.getAvailablity());
+                teacher_list.add(teacher_obj);
+
+            }
+
+            mongoClient.close();
+
+            return teacher_list;
 
         } catch (UnknownHostException e) {
             e.printStackTrace();

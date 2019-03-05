@@ -7,6 +7,7 @@ import com.vector.school.App;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdminHome {
     private JButton profileButton;
@@ -18,6 +19,28 @@ public class AdminHome {
 
     public JPanel getAdminHomePanel() {
         return AdminHomePanel;
+    }
+
+    public AdminHome() {
+        homeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                App.frame.setContentPane(new Home().getHomeJpanel());
+                App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                App.frame.pack();
+                App.frame.setVisible(true);
+            }
+        });
+
+        profileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                App.frame.setContentPane(new AdminProfile().getAdminProfilePanel());
+                App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                App.frame.pack();
+                App.frame.setVisible(true);
+            }
+        });
     }
 
     {

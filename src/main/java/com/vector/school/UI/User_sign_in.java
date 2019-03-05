@@ -33,7 +33,7 @@ public class User_sign_in {
                         App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         App.frame.pack();
                         App.frame.setVisible(true);
-                    } else if (App.cacheUser.getUserrole() == "Admin") {
+                    } else if (App.cacheUser.getUserrole().equals("Admin")) {
                         App.frame.setContentPane(new AdminHome().getAdminHomePanel());
                         App.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         App.frame.pack();
